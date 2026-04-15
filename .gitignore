@@ -1,0 +1,17 @@
+# Root control-plane repo only
+/03_telegram_py/
+/admin/
+/ivwith/
+/jogyeon/
+/myhome/
+/고객관리/
+
+# Local-only runtime and retired archives
+/runtime/
+/archive/
+/__pycache__/
+*.pyc
+
+# Local config / machine state
+/config/canonical_map.local.json
+

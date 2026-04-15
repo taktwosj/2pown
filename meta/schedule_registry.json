@@ -1,0 +1,241 @@
+﻿{
+    "version":  1,
+    "generated_at":  "2026-04-15T16:00:03",
+    "source":  "Windows Task Scheduler mirror for 2POW local workspace",
+    "refresh_command":  "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\\2POW\\tools\\ops\\refresh_schedule_registry.ps1",
+    "authority_note":  "Read this file first for schedule questions before querying Windows Task Scheduler directly.",
+    "tasks":  [
+                  {
+                      "id":  "office_telegram_bot",
+                      "task_path":  "\\",
+                      "task_name":  "1POW_TelegramBot",
+                      "project":  "03_telegram_py",
+                      "purpose":  "Office Telegram bot bootstrap",
+                      "notes":  [
+                                    "Current Windows action still points to C:\\1POW\\03_telegram_py\\START_TELEGRAM_BOT_NOW.bat."
+                                ],
+                      "found":  true,
+                      "state":  "Ready",
+                      "last_run_time":  "2026-04-08T12:41:41",
+                      "next_run_time":  "",
+                      "last_task_result":  "0",
+                      "actions":  [
+                                      {
+                                          "type":  "MSFT_TaskExecAction",
+                                          "execute":  "C:\\1POW\\03_telegram_py\\START_TELEGRAM_BOT_NOW.bat",
+                                          "arguments":  "",
+                                          "working_directory":  ""
+                                      }
+                                  ],
+                      "triggers":  [
+                                       {
+                                           "type":  "MSFT_TaskLogonTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-12T23:58:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  0,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       }
+                                   ]
+                  },
+                  {
+                      "id":  "ivwith_daily_sync",
+                      "task_path":  "\\",
+                      "task_name":  "DailySyncIvwith",
+                      "project":  "ivwith",
+                      "purpose":  "Office H-sheet daily_sync batch",
+                      "notes":  [
+                                    "Current Windows action still points to C:\\1POW\\ivwith\\daily_sync.py."
+                                ],
+                      "found":  true,
+                      "state":  "Ready",
+                      "last_run_time":  "2026-04-15T15:00:00",
+                      "next_run_time":  "2026-04-15T16:00:00",
+                      "last_task_result":  "2147942667",
+                      "actions":  [
+                                      {
+                                          "type":  "MSFT_TaskExecAction",
+                                          "execute":  "cmd.exe",
+                                          "arguments":  "/c powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"\u0026 {python C:/1POW/ivwith/daily_sync.py}\"",
+                                          "working_directory":  "C:\\1POW\\ivwith"
+                                      }
+                                  ],
+                      "triggers":  [
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T08:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       },
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T11:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       },
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T14:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       },
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T15:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       },
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T16:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       },
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T17:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       },
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T18:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       },
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T19:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       },
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T20:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       }
+                                   ]
+                  },
+                  {
+                      "id":  "excel_sync_to_server",
+                      "task_path":  "\\",
+                      "task_name":  "SyncExcelToServer",
+                      "project":  "ivwith",
+                      "purpose":  "Excel sync to server batch",
+                      "notes":  [
+                                    "Current Windows action still points to C:\\1POW\\sync_excel_to_server.ps1."
+                                ],
+                      "found":  true,
+                      "state":  "Ready",
+                      "last_run_time":  "2026-04-15T15:45:45",
+                      "next_run_time":  "2026-04-15T16:15:15",
+                      "last_task_result":  "2147942667",
+                      "actions":  [
+                                      {
+                                          "type":  "MSFT_TaskExecAction",
+                                          "execute":  "cmd.exe",
+                                          "arguments":  "/c powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command \"\u0026 {. C:/1POW/sync_excel_to_server.ps1}\"",
+                                          "working_directory":  "C:\\1POW"
+                                      }
+                                  ],
+                      "triggers":  [
+                                       {
+                                           "type":  "MSFT_TaskTimeTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-03-19T00:45:38",
+                                           "end_boundary":  "",
+                                           "days_interval":  0,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "PT30M",
+                                           "repetition_duration":  "P9999D",
+                                           "random_delay":  ""
+                                       }
+                                   ]
+                  },
+                  {
+                      "id":  "myhome_daily_refresh",
+                      "task_path":  "\\2POW\\",
+                      "task_name":  "myhome_daily_refresh_0700",
+                      "project":  "myhome",
+                      "purpose":  "myhome notice/data daily refresh",
+                      "notes":  [
+                                    "This task is already registered under the \\\\2POW\\\\ Task Scheduler path."
+                                ],
+                      "found":  true,
+                      "state":  "Ready",
+                      "last_run_time":  "",
+                      "next_run_time":  "2026-04-16T07:00:00",
+                      "last_task_result":  "267011",
+                      "actions":  [
+                                      {
+                                          "type":  "MSFT_TaskExecAction",
+                                          "execute":  "cmd.exe",
+                                          "arguments":  "/c \"C:\\2POW\\myhome\\RUN_MYHOME_DAILY_REFRESH.bat\"",
+                                          "working_directory":  ""
+                                      }
+                                  ],
+                      "triggers":  [
+                                       {
+                                           "type":  "MSFT_TaskDailyTrigger",
+                                           "enabled":  true,
+                                           "start_boundary":  "2026-04-15T07:00:00",
+                                           "end_boundary":  "",
+                                           "days_interval":  1,
+                                           "weeks_interval":  0,
+                                           "repetition_interval":  "",
+                                           "repetition_duration":  "",
+                                           "random_delay":  ""
+                                       }
+                                   ]
+                  }
+              ]
+}

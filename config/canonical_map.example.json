@@ -1,0 +1,13 @@
+{
+  "NODE_ROLE_REQUIRED": "office_runner",
+  "OFFICE_WORKDIR": "C:\\2POW",
+  "OFFICE_BOT_PATH": "C:\\2POW\\bot.py",
+  "CANON_XLSM": "C:\\2POW\\고객관리\\통합관리.xlsm",
+  "FORBIDDEN_COPIES": [
+    "C:\\2POW\\projects\\고객관리\\통합관리.xlsm"
+  ],
+  "RUNTIME_DIR": "C:\\2POW\\runtime",
+  "LOCK_FILE": "C:\\2POW\\runtime\\sync.lock",
+  "LAST_SYNC_JSON": "C:\\2POW\\runtime\\last_sync.json",
+  "MAX_LOCK_AGE_MIN": 180
+}
