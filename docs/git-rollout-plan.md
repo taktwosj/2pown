@@ -1,131 +1,158 @@
 # Git/GitHub 적용 계획
 
-> 이 문서는 초기 rollout 기록이다. 현재 표준 운영 규칙은 `README.md`, `docs/START.md`, `meta/project_registry.json`, `docs/git-remote-setup.md`를 따른다.
-> 본문에 남아 있는 `C:\1POW` / `1POW/...` 표기는 cutover 이전 rollout 메모의 historical reference다.
+> 현재 표준 운영 규칙은 `README.md`, `docs/START.md`, `meta/project_registry.json`, `docs/git-remote-setup.md`를 따른다.
 
-## 먼저 답
-- 지금은 `OneDrive 안 bare remote`까지 push가 끝난 상태다.
-- 따라서 같은 OneDrive 계정이 동기화되면 사무실 PC에서도 Git 이력과 원격 저장소를 같이 받을 수 있다.
-- 사무실에서는 `clone` 또는 `pull` 하면 코드와 문서, 작업 이력을 바로 볼 수 있다.
-- 하지만 `Git에 올리지 않은 원본 데이터/결과물`은 계속 OneDrive에서 봐야 한다.
-- 다만 작업 루트(`C:\1POW`)와 OneDrive 미러(`...\OneDrive\11AI\1POW`)는 별개로 보고, OneDrive는 `bare remote 백업 저장소`로만 쓰는 편이 안전하다.
+## 현재 기준
 
-## 아주 쉽게 구분
+- root control-plane repo: `C:\2POW` -> `https://github.com/taktwosj/2pown`
+- nested project repos: `myhome`, `03_telegram_py`, `ivwith`, `jogyeon`, `admin`
+- 외부 분리 repo: `22blog`
+- `OneDrive`는 백업/원본 데이터 동기화 용도이지 canonical Git remote 모델이 아니다.
 
-### Git 원격에서 바로 보는 것
+즉, 지금 구조는 `2POW 하나에 전부 넣는 방식`이 아니라:
+
+1. `2POW` root repo에서 문서/규칙/control-plane 관리
+2. 실제 프로젝트 코드는 각 nested repo에서 관리
+3. 원본 데이터/대용량 자산/엑셀은 Git 밖에서 관리
+
+## Git에서 바로 보는 것
+
 - 코드
 - 문서
-- 실행 스크립트
+- 공용 운영 스크립트
 - 커밋 기록
-- 언제 무엇을 왜 바꿨는지
+- 변경 이유와 diff
 
-### OneDrive에서 계속 보는 것
+## Git 밖에서 계속 보는 것
+
 - 원본 CSV/XLSX/HWPX/ZIP
 - 대용량 생성 결과물
+- SQLite / dump / 고객 DB
 - 시크릿 파일
-- 로그/백업본
+- runtime 상태 파일 / 로그 / 백업본
+- 통합관리 엑셀 실자산
 
-## 사무실에서 실제로 보이는 흐름
-1. 집에서 코드 수정
-2. 커밋
-3. `origin`으로 push
-4. OneDrive 동기화 완료 확인
-5. 사무실 PC에서 `git pull`
-6. 최신 코드와 작업 이력 확인
-7. 필요한 원본 데이터와 결과물은 OneDrive에서 확인
+## 사무실/다른 PC에서 작업하는 흐름
+
+1. `C:\2POW` root repo를 `clone` 또는 `pull`
+2. `docs/START.md`와 `meta/project_registry.json`으로 대상 프로젝트 식별
+3. 대상이 repo-backed면 해당 nested repo에서 `fetch/pull` preflight 수행
+4. 필요한 로컬 데이터와 업무 자산은 OneDrive/실자산 경로에서 확인
+5. 수정 후 검증
+6. repo-backed 변경은 가능하면 commit/push
 
 ## 경로 꼬임 방지 원칙
-- 기준 작업 폴더는 가능하면 집/사무실 모두 `C:\1POW`
-- OneDrive 안 `11AI\1POW`는 백업/미러로만 사용
-- 집/사무실 OneDrive 절대경로가 달라도 `repair_git_mirror_remotes.*`가 각 PC에서 `origin`을 절대경로로 다시 맞춘 뒤 `push/pull`
-- 작업 시작 전 `pull`, 작업 종료 후 `push`
 
-## 저장소별 적용 순서
+- 시작 위치는 항상 `C:\2POW`
+- 기준 문서는 `docs/START.md`
+- 프로젝트 식별 정본은 `meta/project_registry.json`
+- 원격 이름 표준은 `origin`
+- root `2POW`와 nested repo를 섞어서 다루지 않는다.
+- OneDrive 경로는 backup/reference로만 보고 Git authority로 취급하지 않는다.
 
-### 1. 주택 파이프라인
-- 대상:
-- `1POW/myhome`
-- `1POW/01_lhshapt`
-- 이유:
-- 지금 가장 활발하게 작업 중이고, 가장 빨리 이력 관리 효과를 본다.
+## 현재 Git 적용 단위
 
-### 2. CRM/대출상담/금융조견표
-- 대상:
-- `1POW/admin`
-- `1POW/02_jogyeon`
+### 1. root control-plane
+
+- 경로: `C:\2POW`
+- 역할:
+- 공통 문서
+- project registry / schedule registry
+- root wrappers
+- `bot.py`
+- `bot_app`
+- 공용 `tools`
+
+### 2. 주택 데이터
+
+- 경로: `C:\2POW\myhome`
+- 역할:
+- ETL
+- notice 보강
+- sales-ready 산출물
+- 뷰어
 
 ### 3. 텔레그램 운영
-- 대상:
-- `1POW/03_telegram_py`
 
-### 4. 고객관리
-- 대상:
-- `1POW/ivwith`
+- 경로: `C:\2POW\03_telegram_py`
+- 역할:
+- wrapper
+- bot runtime helper
+- office deploy helper
 
-### 5. 통합관리 엑셀/운영 인프라
-- 대상:
-- `1POW/고객관리`
-- `1POW/_vscode_chat_sync`
+### 4. 고객관리 / 리포트
 
-## 첫 커밋에 넣을 것
+- 경로: `C:\2POW\ivwith`
 
-### myhome
-- `*.py`
-- `*.html`
-- `README_ETL.md`
-- `RUN_HOUSING_ETL.*`
+### 5. CRM / 조견
 
-### 01_lhshapt
-- `housing_integrate.py`
-- `hwspr_merge_020304.py`
-- `sh_extract_merge.js`
+- 경로:
+- `C:\2POW\jogyeon`
+- `C:\2POW\admin`
+
+### 6. 외부 게시
+
+- 경로: `C:\ONEtaktwosj\OneDrive\22blog`
+- 비고:
+- `2POW` 안에 미러를 두지 않는다.
+
+## 첫 커밋 또는 초기 push에 넣을 것
+
+### root `2POW`
+
 - `README.md`
-
-### 03_telegram_py
+- `AGENTS.md`
+- `docs/**`
+- `meta/**`
+- `tools/**`
 - `bot.py`
-- `codex_work_status.py`
-- `work_done_notify.py`
-- 운영 배치/런북 문서
+- `bot_app/**`
+- 설정 예시 파일
 
-### admin
-- `crm_bridge.py`
-- `loan-automation-v6.jsx`
-- 운영 문서/배치
+### project repos
 
-### 02_jogyeon
-- `README.md`
-- `_read_xlsx.py`
-- `bankly/금융조견.html`
-- `bankly/금융사이트.html`
-- 레거시 JSX 참고본
-
-### ivwith
 - `*.py`
-- `*.php`
-- `*.html`
 - `*.js`
+- `*.jsx`
+- `*.html`
+- `*.php`
 - `*.md`
-- 실행 배치
+- 실행 배치/런북
+- 설정 예시 파일
 
-## 절대 첫 커밋에 넣지 말 것
+## 첫 커밋 또는 초기 push에 넣지 말 것
+
 - `.env`
-- `bot_token.txt`
-- `allowed_chat_ids.txt`
+- 토큰 / 허용 ID / 키 파일
 - 실제 고객 DB
-- 대용량 CSV/XLSX/HWPX/ZIP
-- SQLite, dump 파일
-- 로그, 임시파일, 캐시
+- SQLite / dump / 대형 CSV/XLSX/HWPX/ZIP
+- 재생성 가능한 캐시/산출물
+- `runtime/**`
+- `archive/**`
+- 로그 / 임시파일 / `__pycache__`
+- 통합관리 `xlsm` 실자산
 
 ## 현실적인 운영 원칙
-- Git 원격은 `작업일지` 역할을 한다.
-- OneDrive는 `재료창고` 역할을 한다.
-- 사무실에서 바로 확인 가능한 것은 `원격으로 push된 코드와 문서`다.
-- 사무실에서 계속 필요하지만 Git에 안 올릴 것은 `OneDrive 데이터`다.
+
+- Git 원격은 코드와 문서의 정본 이력 관리다.
+- OneDrive는 원본 데이터와 업무 자산의 보조 저장소다.
+- root `2POW` repo는 nested repo를 vendoring하지 않는다.
+- 프로젝트 코드 수정은 target nested repo에서 수행한다.
+- `root docs 수정`과 `project code 수정`은 commit scope를 분리하는 편이 안전하다.
+
+## 지금 바로 적용할 기본 순서
+
+1. `C:\2POW`에서 시작
+2. `docs/START.md` 읽기
+3. `meta/project_registry.json` 읽기
+4. 대상 repo가 있으면 `tools/ops/git_repo_preflight.ps1` 또는 동등한 `fetch/pull` 확인
+5. 수정
+6. 검증
+7. 가능하면 commit/push
 
 ## 다음 단계
-1. 각 프로젝트별 Git 저장소 초기화
-2. `.gitignore` 확인
-3. 첫 커밋
-4. legacy mirror remote 생성
-5. 첫 push
-6. 사무실 PC에서 clone/pull
+
+1. root `2POW` 문서와 control-plane을 계속 `2pown`에 반영
+2. nested repo별 `.gitignore`와 원격 상태를 정리
+3. 새 PC bootstrap 절차를 별도 문서/스크립트로 고정
+4. OneDrive 의존 자산과 Git 자산의 경계를 더 명확히 문서화
