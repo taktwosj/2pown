@@ -1,4 +1,4 @@
-# 1POW 폴더 운영구조 개편안
+# 2POW 폴더 운영구조 개편안
 
 ## 현재 문제
 - 코드, 원본 데이터, 생성 결과물, 백업 파일이 같은 레벨에 섞여 있다.
@@ -9,27 +9,40 @@
 ## 목표
 - 작업 단위를 빠르게 식별할 수 있게 만든다.
 - 원본 데이터와 생성 결과물을 분리한다.
-- `myhome`, `admin`, `ivwith`를 서로 독립된 작업 영역으로 본다.
-- 나중에 Git 도입과 자동화 확장이 쉬운 구조로 정리한다.
+- `myhome`, `admin`, `ivwith`, `03_telegram_py`, `jogyeon`를 서로 독립된 작업 영역으로 본다.
+- root `2POW`는 control-plane과 운영 래퍼를 담는 영역으로 정리한다.
 
 ## 권장 구조
 ```text
-1POW/
+2POW/
   AGENTS.md
+  README.md
   docs/
     codex-usage-checklist.md
-    1pow-structure-plan.md
-    change-log/
+    2pow-structure-plan.md
+    2pow-project-map.md
+  meta/
+    project_registry.json
+    schedule_registry.json
+  tools/
+  bot.py
+  bot_app/
+  runtime/
 
   myhome/
-    src/
-    app/
     data/
       raw/
       interim/
       out/
+      cache/
+      tmp/
     reports/
     scripts/
+
+  03_telegram_py/
+    bot_app/
+    office_deploy/
+    runtime_helpers/
 
   admin/
     src/
@@ -45,14 +58,20 @@
     reports/
     scripts/
 
+  jogyeon/
+    bankly/
+
+  고객관리/
+
   archive/
 ```
 
 ## 현재 기준 최소 개편 원칙
 - 한 번에 전부 옮기지 않는다.
-- 먼저 `docs/`와 운영 규칙부터 만든다.
+- 먼저 `docs/`, `meta/`, 운영 규칙부터 만든다.
 - 그다음 생성물이 많은 영역부터 분리한다. 우선순위는 `myhome`이다.
 - 복제본은 바로 삭제하지 말고 `archive/`로 옮긴 뒤 기준 파일을 정한다.
+- root `2POW`와 nested repo의 역할을 섞지 않는다.
 
 ## myhome 우선 개편안
 - 스크립트: `run_daily_pipeline.py`, `build_sales_ready_outputs.py`, `merge_private_rental_into_hwspr.py`는 장기적으로 `myhome/scripts/` 또는 `myhome/src/`로 이동
@@ -62,8 +81,8 @@
 - 리포트: 품질 보고서와 누락 보고서는 `myhome/reports/`
 
 ## 당장 실행할 5단계
-1. `1POW`를 Git 저장소로 초기화한다.
-2. `docs/`를 기준 문서 위치로 고정한다.
+1. root `2POW`는 control-plane repo로 유지한다.
+2. `docs/`와 `meta/`를 기준 문서 위치로 고정한다.
 3. `myhome` 안에서 `raw / interim / out / reports`만 먼저 나눈다.
 4. `03_telegram_py` 아래 복제본 중 기준 파일과 배포 파일을 구분한다.
 5. 실행 명령을 하나로 줄이고, 그 명령이 끝나면 보고서까지 생성되게 맞춘다.

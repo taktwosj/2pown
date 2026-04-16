@@ -1,6 +1,7 @@
 # Git/GitHub 적용 계획
 
 > 이 문서는 초기 rollout 기록이다. 현재 표준 운영 규칙은 `README.md`, `docs/START.md`, `meta/project_registry.json`, `docs/git-remote-setup.md`를 따른다.
+> 본문에 남아 있는 `C:\1POW` / `1POW/...` 표기는 cutover 이전 rollout 메모의 historical reference다.
 
 ## 먼저 답
 - 지금은 `OneDrive 안 bare remote`까지 push가 끝난 상태다.

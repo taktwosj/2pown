@@ -4,6 +4,8 @@
 
 업데이트: 2026-04-10 기준 top-level `C:\1POW\ivwith-admin-new`는 `C:\1POW\quarantine\legacy_app_copies\2026-04-10\root_ivwith-admin-new_copy`로 archived 됐다. 아래 내용은 archive 전 점검 스냅샷을 포함한다.
 
+참고: 이 문서는 `2POW` cutover 이전 admin 재구성 계획의 historical snapshot이다. 본문의 `C:\1POW\...` 경로는 당시 기준을 그대로 둔 것이며, 현재 authority는 `C:\2POW`와 `meta/project_registry.json`을 따른다.
+
 ## 1. 목적
 
 - `C:\1POW\admin`을 운영 가능한 구조로 다시 정리한다.
@@ -72,9 +74,9 @@
 - `C:\1POW\admin\REMOTE_SETUP.md`
   - 데이터 파일: `admin/data/crm-data.json`
   - 백업 디렉터리: `admin/data/backups`
-- `C:\1POW\docs\1pow-project-map.md`
+- `C:\2POW\docs\2pow-project-map.md`
   - `admin/`과 `02_jogyeon/`의 기준본/레거시 구분 필요
-- `C:\1POW\docs\SYSTEM_MAP.md`
+- `C:\2POW\docs\SYSTEM_MAP.md`
   - BANKLY를 금리/수당/은행조건 정본으로 취급
 
 따라서 이번 정리는 "폴더 예쁘게 만들기"가 아니라 path authority 복구 작업으로 다뤄야 한다.
@@ -309,8 +311,8 @@ C:\1POW\admin\
 
 업데이트 대상 문서:
 
-- `C:\1POW\docs\1pow-project-map.md`
-- `C:\1POW\docs\SYSTEM_MAP.md`
+- `C:\2POW\docs\2pow-project-map.md`
+- `C:\2POW\docs\SYSTEM_MAP.md`
 - `C:\1POW\admin\bankly\HANDOVER.md` 또는 최종 BANKLY handover 위치
 - `C:\1POW\docs\projects\9-admin-new\HANDOVER.md`
 - 필요 시 `C:\1POW\meta\project_registry.json`
@@ -326,8 +328,8 @@ C:\1POW\admin\
 - `C:\1POW\admin\*.bat`
 - `C:\1POW\admin\*.ps1`
 - `C:\1POW\admin\bankly\HANDOVER.md`
-- `C:\1POW\docs\1pow-project-map.md`
-- `C:\1POW\docs\SYSTEM_MAP.md`
+- `C:\2POW\docs\2pow-project-map.md`
+- `C:\2POW\docs\SYSTEM_MAP.md`
 
 확인할 항목:
 

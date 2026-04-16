@@ -1,4 +1,4 @@
-# 1POW 시스템 연동 구조
+# 2POW 시스템 연동 구조
 
 > 프로젝트간 데이터 흐름과 의존 관계를 정리한 문서.
 > 개별 프로젝트 상세는 각 HANDOVER.md를 본다.
@@ -27,7 +27,7 @@ bankly MCP 서버 (`jogyeon/bankly`, Cafe24 target: `/srv/workspace/02_jogyeon/b
   │
   │ admin접수.py / Playwright
   ↓
-legacy crm-v9-site.html (archived outside 1POW) ──→ ivwith DB (premloan)
+legacy crm-v9-site.html (archived outside active 2POW workspace) ──→ ivwith DB (premloan)
                         ↑
                         │ CSV 동기화
                         └── daily_sync.py
@@ -45,7 +45,7 @@ legacy crm-v9-site.html (archived outside 1POW) ──→ ivwith DB (premloan)
 | 프로젝트 | 의존 대상 | 연동 방식 |
 |---------|----------|----------|
 | 텔레그램 봇 (#6) | 고객관리 엑셀 (#7) | daily_sync, 엑셀 COM 읽기/쓰기 |
-| 텔레그램 봇 (#6) | Admin 고도화 (#9) | admin접수.py → legacy crm-v9-site.html (archived outside 1POW) → ivwith DB |
+| 텔레그램 봇 (#6) | Admin 고도화 (#9) | admin접수.py → legacy crm-v9-site.html (archived outside active 2POW workspace) → ivwith DB |
 | 텔레그램 봇 (#6) | BANKLY (#3) | admin접수 시 상품 분류/금리 참조 |
 | 텔레그램 봇 (#6) | 외부 공고문 게시 | 71번 메뉴 → `C:\ONEtaktwosj\OneDrive\22blog\wordpress\publish_notice_posts.py` 실행 |
 | BANKLY (#3) | 고객관리 엑셀 (#7) | 금리/수당 변경 시 양쪽 동시 확인 |

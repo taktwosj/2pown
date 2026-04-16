@@ -1,14 +1,16 @@
-# 1POW Workspace Audit
+# 2POW Workspace Audit
 
 작성일: 2026-04-09  
-대상 경로: `C:\1POW`  
-목적: 현재 `1POW` 전체 폴더를 전수 스캔해, 실제로 쓰는 영역과 정리 후보를 분리하고 정리 우선순위를 제안한다.
+대상 경로: `C:\2POW`  
+목적: 현재 `2POW` 전체 폴더를 전수 스캔해, 실제로 쓰는 영역과 정리 후보를 분리하고 정리 우선순위를 제안한다.
 
-업데이트: 2026-04-10 기준 top-level `ivwith-admin-new`는 `C:\1POW\quarantine\legacy_app_copies\2026-04-10\root_ivwith-admin-new_copy`로 archived 됐다. 아래 용량/경로 표는 archive 전 스냅샷을 포함한다.
+참고: 이 문서는 2026-04-09에 작성된 workspace audit를 `2POW` 기준 표기로 정규화한 이관본이다. 용량/구조 수치는 당시 스냅샷을 유지한다.
+
+업데이트: 2026-04-10 기준 top-level `ivwith-admin-new`는 legacy quarantine copy로 archived 됐다. 아래 용량/경로 표는 archive 전 스냅샷을 포함한다.
 
 ## 1. 결론 요약
 
-현재 `C:\1POW`는 "한 프로젝트의 작업 폴더"가 아니라 아래가 한곳에 겹쳐 있는 상태다.
+현재 `C:\2POW`는 "한 프로젝트의 작업 폴더"가 아니라 아래가 한곳에 겹쳐 있는 상태다.
 
 - 실제 운영 중인 Git 저장소
 - 심볼릭 링크 기반 경로 별칭
@@ -224,10 +226,10 @@
 
 ### D. 이상 징후로 별도 처리 필요
 
-- `C:\1POW\C1POW`
-- `C:\1POW\C1POWruntime`
-- `C:\1POW\OneDrive` 파일
-- `\\?\C:\1POW\nul`
+- `C:\2POW\C2POW`
+- `C:\2POW\C2POWruntime`
+- `C:\2POW\OneDrive` 파일
+- `\\?\C:\2POW\nul`
 
 판단:
 
@@ -292,7 +294,7 @@
 
 ## 10. 최종 판단
 
-지금 `C:\1POW`에서 "안 쓰는 것 같아 보이는 것"은 실제로 많다. 다만 성격이 세 가지로 섞여 있다.
+지금 `C:\2POW`에서 "안 쓰는 것 같아 보이는 것"은 실제로 많다. 다만 성격이 세 가지로 섞여 있다.
 
 - 진짜 안 쓰는 임시물
 - 정본은 아닌 복사본/미러
